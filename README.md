@@ -134,6 +134,6 @@ new five.Board().on('ready', function() {
 
 Finally, attach an arduino and what do you get? 
 
-U TUBS
+<iframe width="560" height="315" src="http://www.youtube.com/embed/OHQp_1wcFDU" frameborder="0" allowfullscreen></iframe>
 
 The worlds first KnightRider LED effect powered by a Knockout view model!
