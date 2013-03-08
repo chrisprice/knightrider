@@ -1,0 +1,55 @@
+<style>
+    body {
+        background: black;
+    }
+    b {
+        height: 10px;
+        width: 10px;
+        display: inline-block;
+        background: red;
+        border: 1px solid black;
+    }
+</style>
+
+        <b data-bind="style: { opacity: bars[0] }"></b>
+        <b data-bind="style: { opacity: bars[1] }"></b>
+        <b data-bind="style: { opacity: bars[2] }"></b>
+        <b data-bind="style: { opacity: bars[3] }"></b>
+        <b data-bind="style: { opacity: bars[4] }"></b>
+        <b data-bind="style: { opacity: bars[5] }"></b>
+
+<script src="http://localhost/~chris/iosbin/knockout-latest.debug.js"></script>
+<script>
+    var viewModel = {
+        ticks: ko.observable(0),
+        tick: function() {
+            this.ticks(this.ticks() + 1);
+        },
+        bars: []
+    };
+
+    function createBar(index, count) {
+        return ko.computed(function() {
+            var a = viewModel.ticks() % ((count - 1) * 2);
+            var b = Math.abs(a - count + 1);
+            var c = Math.abs(index - b);
+            var d = c / count;
+            var e = 1 - d;
+            return (e * e * e).toFixed(3);
+        });
+    }
+
+    for (var index = 0, count = 6; index < count; index++) {
+        viewModel.bars[index] = createBar(index, count);
+    }
+
+</script>
+
+<script>
+    setInterval(function() {
+        viewModel.tick();
+    }, 100);
+
+    ko.applyBindings(viewModel);
+</script>
+
